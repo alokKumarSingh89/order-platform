@@ -25,22 +25,23 @@ model Order {
 }
 
 model OutboxEvent {
-  id            String       @id @default(uuid())
+  id            String   @id @default(uuid())
   eventType     String
   aggregateType String
   aggregateId   String
+  payload       Json
+  status        OutboxStatus @default(PENDING)
+  attempts      Int      @default(0)
+  availableAt   DateTime @default(now())
+  lockedAt      DateTime?
+  lockedBy      String?
+  lastError     String?
+  publishedAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  payload Json
-
-  status OutboxStatus @default(PENDING)
-
-  attempts Int @default(0)
-
-  createdAt   DateTime  @default(now())
-  publishedAt DateTime?
-
-  @@index([status, createdAt])
-  @@index([aggregateType, aggregateId])
+  @@index([status, availableAt, createdAt])
+  @@index([lockedBy])
 }
 
 model ProcessedEvent {
@@ -59,6 +60,8 @@ enum OrderStatus {
 
 enum OutboxStatus {
   PENDING
+  PROCESSING
   PUBLISHED
   FAILED
+  DEAD
 }

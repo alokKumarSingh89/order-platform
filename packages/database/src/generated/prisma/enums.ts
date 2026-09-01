@@ -20,8 +20,10 @@ export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 
 export const OutboxStatus = {
   PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
   PUBLISHED: 'PUBLISHED',
-  FAILED: 'FAILED'
+  FAILED: 'FAILED',
+  DEAD: 'DEAD'
 } as const
 
 export type OutboxStatus = (typeof OutboxStatus)[keyof typeof OutboxStatus]
