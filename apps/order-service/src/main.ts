@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,9 +10,10 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  const config = app.get(ConfigService);
-  const port = config.get<number>('PORT') ?? 3001;
+  const port = Number(process.env.PORT ?? 3001);
+
   await app.listen(port);
-  console.log(`API Gateway running on port ${port}`);
+
+  console.log(`Order Service running on port:${port}`);
 }
 bootstrap().catch(console.error);

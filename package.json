@@ -9,9 +9,18 @@
   "scripts": {
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
-    "lint": "npm run lint --workspaces"
+    "lint": "npm run lint --workspaces",
+    "dev:start": "pm2 start ecosystem.config.cjs",
+    "dev:stop": "pm2 stop all",
+    "dev:restart": "pm2 restart ecosystem.config.cjs",
+    "dev:delete": "pm2 delete all",
+    "dev:logs": "pm2 logs",
+    "dev:status": "pm2 list"
   },
   "engines": {
     "node": ">=25"
+  },
+  "devDependencies": {
+    "pm2": "^7.0.4"
   }
 }

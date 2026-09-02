@@ -25,31 +25,30 @@ model Order {
 }
 
 model OutboxEvent {
-  id            String   @id @default(uuid())
+  id            String       @id @default(uuid())
   eventType     String
   aggregateType String
   aggregateId   String
   payload       Json
   status        OutboxStatus @default(PENDING)
-  attempts      Int      @default(0)
-  availableAt   DateTime @default(now())
-  lockedAt      DateTime?
-  lockedBy      String?
+  attempts      Int          @default(0)
   lastError     String?
+  nextAttemptAt DateTime?
+  lockedAt      DateTime?
   publishedAt   DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  @@index([status,nextAttemptAt,createdAt])
 
-  @@index([status, availableAt, createdAt])
-  @@index([lockedBy])
+  @@index([status,lockedAt])
 }
 
 model ProcessedEvent {
-  eventId     String   @id
-  eventType   String
+  id          String   @id @default(uuid())
+  eventId     String
+  consumer    String
   processedAt DateTime @default(now())
-
-  @@index([eventType])
+  @@unique([eventId,consumer])
 }
 
 enum OrderStatus {

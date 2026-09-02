@@ -702,10 +702,9 @@ export const OutboxEventScalarFieldEnum = {
   payload: 'payload',
   status: 'status',
   attempts: 'attempts',
-  availableAt: 'availableAt',
-  lockedAt: 'lockedAt',
-  lockedBy: 'lockedBy',
   lastError: 'lastError',
+  nextAttemptAt: 'nextAttemptAt',
+  lockedAt: 'lockedAt',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -715,8 +714,9 @@ export type OutboxEventScalarFieldEnum = (typeof OutboxEventScalarFieldEnum)[key
 
 
 export const ProcessedEventScalarFieldEnum = {
+  id: 'id',
   eventId: 'eventId',
-  eventType: 'eventType',
+  consumer: 'consumer',
   processedAt: 'processedAt'
 } as const
 

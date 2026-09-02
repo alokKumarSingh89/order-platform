@@ -27,10 +27,10 @@ async function bootstrap() {
     try {
       await publisher.processBatch();
     } catch (error) {
-      logger.error('Outbox batch failed', error);
+      logger.error('Outbox batch failed ', error);
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
   }
 }
 

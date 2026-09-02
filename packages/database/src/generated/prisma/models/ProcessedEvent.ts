@@ -25,40 +25,46 @@ export type AggregateProcessedEvent = {
 }
 
 export type ProcessedEventMinAggregateOutputType = {
+  id: string | null
   eventId: string | null
-  eventType: string | null
+  consumer: string | null
   processedAt: Date | null
 }
 
 export type ProcessedEventMaxAggregateOutputType = {
+  id: string | null
   eventId: string | null
-  eventType: string | null
+  consumer: string | null
   processedAt: Date | null
 }
 
 export type ProcessedEventCountAggregateOutputType = {
+  id: number
   eventId: number
-  eventType: number
+  consumer: number
   processedAt: number
   _all: number
 }
 
 
 export type ProcessedEventMinAggregateInputType = {
+  id?: true
   eventId?: true
-  eventType?: true
+  consumer?: true
   processedAt?: true
 }
 
 export type ProcessedEventMaxAggregateInputType = {
+  id?: true
   eventId?: true
-  eventType?: true
+  consumer?: true
   processedAt?: true
 }
 
 export type ProcessedEventCountAggregateInputType = {
+  id?: true
   eventId?: true
-  eventType?: true
+  consumer?: true
   processedAt?: true
   _all?: true
 }
@@ -136,8 +142,9 @@ export type ProcessedEventGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 export type ProcessedEventGroupByOutputType = {
+  id: string
   eventId: string
-  eventType: string
+  consumer: string
   processedAt: Date
   _count: ProcessedEventCountAggregateOutputType | null
   _min: ProcessedEventMinAggregateOutputType | null
@@ -163,29 +170,34 @@ export type ProcessedEventWhereInput = {
   AND?: Prisma.ProcessedEventWhereInput | Prisma.ProcessedEventWhereInput[]
   OR?: Prisma.ProcessedEventWhereInput[]
   NOT?: Prisma.ProcessedEventWhereInput | Prisma.ProcessedEventWhereInput[]
+  id?: Prisma.StringFilter<"ProcessedEvent"> | string
   eventId?: Prisma.StringFilter<"ProcessedEvent"> | string
-  eventType?: Prisma.StringFilter<"ProcessedEvent"> | string
+  consumer?: Prisma.StringFilter<"ProcessedEvent"> | string
   processedAt?: Prisma.DateTimeFilter<"ProcessedEvent"> | Date | string
 }
 
 export type ProcessedEventOrderByWithRelationInput = {
+  id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
-  eventType?: Prisma.SortOrder
+  consumer?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
 }
 
 export type ProcessedEventWhereUniqueInput = Prisma.AtLeast<{
-  eventId?: string
+  id?: string
+  eventId_consumer?: Prisma.ProcessedEventEventIdConsumerCompoundUniqueInput
   AND?: Prisma.ProcessedEventWhereInput | Prisma.ProcessedEventWhereInput[]
   OR?: Prisma.ProcessedEventWhereInput[]
   NOT?: Prisma.ProcessedEventWhereInput | Prisma.ProcessedEventWhereInput[]
-  eventType?: Prisma.StringFilter<"ProcessedEvent"> | string
+  eventId?: Prisma.StringFilter<"ProcessedEvent"> | string
+  consumer?: Prisma.StringFilter<"ProcessedEvent"> | string
   processedAt?: Prisma.DateTimeFilter<"ProcessedEvent"> | Date | string
-}, "eventId">
+}, "id" | "eventId_consumer">
 
 export type ProcessedEventOrderByWithAggregationInput = {
+  id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
-  eventType?: Prisma.SortOrder
+  consumer?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
   _count?: Prisma.ProcessedEventCountOrderByAggregateInput
   _max?: Prisma.ProcessedEventMaxOrderByAggregateInput
@@ -196,105 +208,126 @@ export type ProcessedEventScalarWhereWithAggregatesInput = {
   AND?: Prisma.ProcessedEventScalarWhereWithAggregatesInput | Prisma.ProcessedEventScalarWhereWithAggregatesInput[]
   OR?: Prisma.ProcessedEventScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProcessedEventScalarWhereWithAggregatesInput | Prisma.ProcessedEventScalarWhereWithAggregatesInput[]
+  id?: Prisma.StringWithAggregatesFilter<"ProcessedEvent"> | string
   eventId?: Prisma.StringWithAggregatesFilter<"ProcessedEvent"> | string
-  eventType?: Prisma.StringWithAggregatesFilter<"ProcessedEvent"> | string
+  consumer?: Prisma.StringWithAggregatesFilter<"ProcessedEvent"> | string
   processedAt?: Prisma.DateTimeWithAggregatesFilter<"ProcessedEvent"> | Date | string
 }
 
 export type ProcessedEventCreateInput = {
+  id?: string
   eventId: string
-  eventType: string
+  consumer: string
   processedAt?: Date | string
 }
 
 export type ProcessedEventUncheckedCreateInput = {
+  id?: string
   eventId: string
-  eventType: string
+  consumer: string
   processedAt?: Date | string
 }
 
 export type ProcessedEventUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
-  eventType?: Prisma.StringFieldUpdateOperationsInput | string
+  consumer?: Prisma.StringFieldUpdateOperationsInput | string
   processedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProcessedEventUncheckedUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
-  eventType?: Prisma.StringFieldUpdateOperationsInput | string
+  consumer?: Prisma.StringFieldUpdateOperationsInput | string
   processedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProcessedEventCreateManyInput = {
+  id?: string
   eventId: string
-  eventType: string
+  consumer: string
   processedAt?: Date | string
 }
 
 export type ProcessedEventUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
-  eventType?: Prisma.StringFieldUpdateOperationsInput | string
+  consumer?: Prisma.StringFieldUpdateOperationsInput | string
   processedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProcessedEventUncheckedUpdateManyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
-  eventType?: Prisma.StringFieldUpdateOperationsInput | string
+  consumer?: Prisma.StringFieldUpdateOperationsInput | string
   processedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type ProcessedEventEventIdConsumerCompoundUniqueInput = {
+  eventId: string
+  consumer: string
+}
+
 export type ProcessedEventCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
-  eventType?: Prisma.SortOrder
+  consumer?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
 }
 
 export type ProcessedEventMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
-  eventType?: Prisma.SortOrder
+  consumer?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
 }
 
 export type ProcessedEventMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
-  eventType?: Prisma.SortOrder
+  consumer?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
 }
 
 
 
 export type ProcessedEventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   eventId?: boolean
-  eventType?: boolean
+  consumer?: boolean
   processedAt?: boolean
 }, ExtArgs["result"]["processedEvent"]>
 
 export type ProcessedEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   eventId?: boolean
-  eventType?: boolean
+  consumer?: boolean
   processedAt?: boolean
 }, ExtArgs["result"]["processedEvent"]>
 
 export type ProcessedEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   eventId?: boolean
-  eventType?: boolean
+  consumer?: boolean
   processedAt?: boolean
 }, ExtArgs["result"]["processedEvent"]>
 
 export type ProcessedEventSelectScalar = {
+  id?: boolean
   eventId?: boolean
-  eventType?: boolean
+  consumer?: boolean
   processedAt?: boolean
 }
 
-export type ProcessedEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"eventId" | "eventType" | "processedAt", ExtArgs["result"]["processedEvent"]>
+export type ProcessedEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "consumer" | "processedAt", ExtArgs["result"]["processedEvent"]>
 
 export type $ProcessedEventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProcessedEvent"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    id: string
     eventId: string
-    eventType: string
+    consumer: string
     processedAt: Date
   }, ExtArgs["result"]["processedEvent"]>
   composites: {}
@@ -379,8 +412,8 @@ export interface ProcessedEventDelegate<ExtArgs extends runtime.Types.Extensions
    * // Get first 10 ProcessedEvents
    * const processedEvents = await prisma.processedEvent.findMany({ take: 10 })
    * 
-   * // Only select the `eventId`
-   * const processedEventWithEventIdOnly = await prisma.processedEvent.findMany({ select: { eventId: true } })
+   * // Only select the `id`
+   * const processedEventWithIdOnly = await prisma.processedEvent.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends ProcessedEventFindManyArgs>(args?: Prisma.SelectSubset<T, ProcessedEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessedEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -424,9 +457,9 @@ export interface ProcessedEventDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Create many ProcessedEvents and only return the `eventId`
-   * const processedEventWithEventIdOnly = await prisma.processedEvent.createManyAndReturn({
-   *   select: { eventId: true },
+   * // Create many ProcessedEvents and only return the `id`
+   * const processedEventWithIdOnly = await prisma.processedEvent.createManyAndReturn({
+   *   select: { id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -515,9 +548,9 @@ export interface ProcessedEventDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Update zero or more ProcessedEvents and only return the `eventId`
-   * const processedEventWithEventIdOnly = await prisma.processedEvent.updateManyAndReturn({
-   *   select: { eventId: true },
+   * // Update zero or more ProcessedEvents and only return the `id`
+   * const processedEventWithIdOnly = await prisma.processedEvent.updateManyAndReturn({
+   *   select: { id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -719,8 +752,9 @@ export interface Prisma__ProcessedEventClient<T, Null = never, ExtArgs extends r
  * Fields of the ProcessedEvent model
  */
 export interface ProcessedEventFieldRefs {
+  readonly id: Prisma.FieldRef<"ProcessedEvent", 'String'>
   readonly eventId: Prisma.FieldRef<"ProcessedEvent", 'String'>
-  readonly eventType: Prisma.FieldRef<"ProcessedEvent", 'String'>
+  readonly consumer: Prisma.FieldRef<"ProcessedEvent", 'String'>
   readonly processedAt: Prisma.FieldRef<"ProcessedEvent", 'DateTime'>
 }
     
