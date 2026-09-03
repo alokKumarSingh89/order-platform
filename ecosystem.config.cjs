@@ -13,12 +13,12 @@ const getServiceConfig = (name, instances = 1) => {
     },
   };
 };
-const getServiceWorker = (name, instances = 1) => {
+const getServiceWorker = (name, type = "worker", instances = 1) => {
   return {
-    name: `${name}-worker`,
+    name: `${name}-${type}`,
     cwd: `./apps/${name}`,
     script: "npm",
-    args: "run start:worker:dev",
+    args: `run start:${type}:dev`,
     instances,
     exec_mode: "fork",
     autorestart: true,
@@ -31,6 +31,7 @@ const apps = [
   getServiceConfig("api-gateway"),
   getServiceConfig("order-service"),
   getServiceWorker("order-service"),
+  getServiceWorker("order-service", "saga"),
   getServiceConfig("inventory-service"),
   getServiceWorker("inventory-service"),
   getServiceConfig("payment-service"),
