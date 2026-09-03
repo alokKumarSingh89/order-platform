@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '@order-platform/database';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class OrdersService {
   constructor(private readonly db: DatabaseService) {}
 
   async createOrder(dto: CreateOrderDto) {
+    const eventId = randomUUID();
     return this.db.$transaction(async (tx) => {
       const order = await tx.order.create({
         data: {
@@ -19,10 +21,12 @@ export class OrdersService {
       });
       await tx.outboxEvent.create({
         data: {
+          id: eventId,
           eventType: 'order.created',
           aggregateType: 'Order',
           aggregateId: order.id.toString(),
           payload: {
+            eventId,
             orderId: order.id.toString(),
             userId: dto.userId,
             productId: dto.productId,

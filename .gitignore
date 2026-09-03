@@ -12,3 +12,4 @@ coverage/
 
 .idea/
 .vscode/
+tsconfig.build.tsbuildinfo

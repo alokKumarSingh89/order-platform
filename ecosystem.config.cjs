@@ -19,7 +19,7 @@ module.exports = {
       cwd: "./apps/order-service",
       script: "npm",
       args: "run start:dev",
-      instances: 3,
+      instances: 1,
       exec_mode: "fork",
       autorestart: true,
       increment_var: "PORT",
@@ -35,6 +35,32 @@ module.exports = {
       script: "npm",
       args: "run start:worker:dev",
       instances: 2,
+      exec_mode: "fork",
+      autorestart: true,
+      env: {
+        NODE_ENV: "development",
+      },
+    },
+    {
+      name: "inventory-worker",
+      cwd: "./apps/inventory-service",
+      script: "npm",
+      args: "run start:dev",
+      instances: 1,
+      exec_mode: "fork",
+      autorestart: true,
+      increment_var: "PORT",
+      env: {
+        NODE_ENV: "development",
+      },
+    },
+
+    {
+      name: "inventory-outbox-worker",
+      cwd: "./apps/inventory-service",
+      script: "npm",
+      args: "run start:outbox:dev",
+      instances: 1,
       exec_mode: "fork",
       autorestart: true,
       env: {
