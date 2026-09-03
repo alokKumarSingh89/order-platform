@@ -38,9 +38,9 @@ model OutboxEvent {
   publishedAt   DateTime?
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
-  @@index([status,nextAttemptAt,createdAt])
 
-  @@index([status,lockedAt])
+  @@index([status, nextAttemptAt, createdAt])
+  @@index([status, lockedAt])
 }
 
 model ProcessedEvent {
@@ -48,7 +48,8 @@ model ProcessedEvent {
   eventId     String
   consumer    String
   processedAt DateTime @default(now())
-  @@unique([eventId,consumer])
+
+  @@unique([eventId, consumer])
 }
 
 enum OrderStatus {

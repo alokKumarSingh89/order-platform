@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { DatabaseService } from '@order-platform/database';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { randomUUID } from 'crypto';
+import { DatabaseService } from '../database/database.service';
 
 @Injectable()
 export class OrdersService {

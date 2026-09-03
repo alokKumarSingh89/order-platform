@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 
-import { DatabaseModule } from '@order-platform/database';
-
 import { KafkaModule } from '../kafka/kafka.module';
 
 import { OutboxPublisherService } from './outbox-publisher.service';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
+import { DatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [

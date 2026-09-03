@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { DatabaseService } from '@order-platform/database';
 import { KafkaProducerService } from '../kafka/kafka-producer.service';
 import { OutboxEvent } from './outbox.types';
+import { DatabaseService } from '../database/database.service';
 
 @Injectable()
 export class OutboxPublisherService {

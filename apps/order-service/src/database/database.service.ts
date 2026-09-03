@@ -17,11 +17,12 @@ export class DatabaseService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor(@Inject(ConfigService) private readonly config: ConfigService) {
-    const connectionString = config.getOrThrow<string>('PAYMENT_DATABASE_URL');
+    const connectionString = config.getOrThrow<string>('ORDER_DATABASE_URL');
 
     const adapter = new PrismaPg({
       connectionString,
     });
+
     super({
       adapter,
     });

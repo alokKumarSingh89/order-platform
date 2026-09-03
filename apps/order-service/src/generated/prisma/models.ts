@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Order'
-export type * from './models/OutboxEvent'
-export type * from './models/ProcessedEvent'
-export type * from './commonInputTypes'
+export type * from './models/Order.js'
+export type * from './models/OutboxEvent.js'
+export type * from './models/ProcessedEvent.js'
+export type * from './commonInputTypes.js'
