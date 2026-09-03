@@ -1,71 +1,41 @@
+const getServiceConfig = (name, instances = 1) => {
+  return {
+    name,
+    cwd: `./apps/${name}`,
+    script: "npm",
+    args: "run start:dev",
+    instances,
+    exec_mode: "fork",
+    autorestart: true,
+    increment_var: "PORT",
+    env: {
+      NODE_ENV: "development",
+    },
+  };
+};
+const getServiceWorker = (name, instances = 1) => {
+  return {
+    name: `${name}-worker`,
+    cwd: `./apps/${name}`,
+    script: "npm",
+    args: "run start:worker:dev",
+    instances,
+    exec_mode: "fork",
+    autorestart: true,
+    env: {
+      NODE_ENV: "development",
+    },
+  };
+};
+const apps = [
+  getServiceConfig("api-gateway"),
+  getServiceConfig("order-service"),
+  getServiceWorker("order-service"),
+  getServiceConfig("inventory-service"),
+  getServiceWorker("inventory-service"),
+  getServiceConfig("payment-service"),
+  getServiceWorker("payment-service"),
+];
 module.exports = {
-  apps: [
-    {
-      name: "api-gateway",
-      cwd: "./apps/api-gateway",
-      script: "npm",
-      args: "run start:dev",
-      instances: 1,
-      exec_mode: "fork",
-      autorestart: true,
-      env: {
-        NODE_ENV: "development",
-        PORT: 3000,
-      },
-    },
-
-    {
-      name: "order-api",
-      cwd: "./apps/order-service",
-      script: "npm",
-      args: "run start:dev",
-      instances: 1,
-      exec_mode: "fork",
-      autorestart: true,
-      increment_var: "PORT",
-      env: {
-        NODE_ENV: "development",
-        PORT: 3001,
-      },
-    },
-
-    {
-      name: "outbox-worker",
-      cwd: "./apps/order-service",
-      script: "npm",
-      args: "run start:worker:dev",
-      instances: 2,
-      exec_mode: "fork",
-      autorestart: true,
-      env: {
-        NODE_ENV: "development",
-      },
-    },
-    {
-      name: "inventory-worker",
-      cwd: "./apps/inventory-service",
-      script: "npm",
-      args: "run start:dev",
-      instances: 1,
-      exec_mode: "fork",
-      autorestart: true,
-      increment_var: "PORT",
-      env: {
-        NODE_ENV: "development",
-      },
-    },
-
-    {
-      name: "inventory-outbox-worker",
-      cwd: "./apps/inventory-service",
-      script: "npm",
-      args: "run start:outbox:dev",
-      instances: 1,
-      exec_mode: "fork",
-      autorestart: true,
-      env: {
-        NODE_ENV: "development",
-      },
-    },
-  ],
+  apps,
 };

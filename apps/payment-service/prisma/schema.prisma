@@ -1,0 +1,59 @@
+generator client {
+    provider = "prisma-client"
+    output   = "../src/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+enum PaymentStatus {
+    PENDING
+    COMPLETED
+    FAILED
+}
+
+model Payment {
+    id            String        @id @default(uuid())
+    orderId       String        @unique
+    amount        Decimal
+    status        PaymentStatus @default(PENDING)
+    failureReason String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([status])
+    @@index([createdAt])
+}
+
+model ProcessedEvent {
+    id          String   @id @default(uuid())
+    eventId     String
+    consumer    String
+    processedAt DateTime @default(now())
+
+    @@unique([eventId, consumer])
+}
+
+model OutboxEvent {
+    id            String @id @default(uuid())
+    eventType     String
+    aggregateType String
+    aggregateId   String
+    payload       Json
+
+    status    String  @default("PENDING")
+    attempts  Int     @default(0)
+    lastError String?
+
+    nextAttemptAt DateTime?
+    lockedAt      DateTime?
+    publishedAt   DateTime?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([status, nextAttemptAt, createdAt])
+    @@index([status, lockedAt])
+}
