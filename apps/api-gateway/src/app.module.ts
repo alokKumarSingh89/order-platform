@@ -1,11 +1,10 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { HttpModule } from '@nestjs/axios';
-import { OrdersGatewayModule } from './orders/orders-gateway.module';
+import { OrdersModule } from './orders/orders.module';
 import { RequestIdMiddleware } from './common/request-id.middleware';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -17,10 +16,10 @@ import { RequestIdMiddleware } from './common/request-id.middleware';
       timeout: 5000,
       maxRedirects: 3,
     }),
-    OrdersGatewayModule,
+    OrdersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [HealthController],
+  providers: [],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

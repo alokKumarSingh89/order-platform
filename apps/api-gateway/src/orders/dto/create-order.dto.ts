@@ -1,4 +1,4 @@
-import { IsInt, IsNumber, IsPositive, IsString } from 'class-validator';
+import { IsInt, IsNumber, IsPositive, IsString, Min } from 'class-validator';
 
 export class CreateOrderDto {
   @IsString()
@@ -9,6 +9,7 @@ export class CreateOrderDto {
 
   @IsInt()
   @IsPositive()
+  @Min(1)
   quantity!: number;
 
   @IsNumber()
